@@ -4,7 +4,8 @@ import merge from 'lodash/merge'
 
 export function WithInjectToProps(component, { name, functional }) {
   component = normalizeComponent(component)
-  const { name: compName, props: propDefs } = component.options
+  console.log('options: ', component.options)
+  const { name: compName, props: propDefs = {} } = component.options
 
   return {
     name: compName ? `${compName}WithInjectProps` : 'AnonymousWithInjectProps',
@@ -20,7 +21,7 @@ export function WithInjectToProps(component, { name, functional }) {
     props: propDefs,
 
     computed: {
-      injectedProps() {
+      propsToInject() {
         return injectProps(this.$props, this[name], propDefs)
       },
     },
@@ -28,12 +29,12 @@ export function WithInjectToProps(component, { name, functional }) {
     render: functional
       ? // render Wrapper as a functional component
         function(h, { props, children, data, injections }) {
-          const injectedProps = injectProps(props, injections[name], propDefs)
+          const propsToInject = injectProps(props, injections[name], propDefs)
           return h(
             component,
             {
               ...data,
-              props: injectedProps,
+              props: propsToInject,
             },
             children
           )
@@ -45,7 +46,7 @@ export function WithInjectToProps(component, { name, functional }) {
             {
               attrs: this.$attrs,
               on: this.$listeners,
-              props: this.injectedProps,
+              props: this.propsToInject,
               scopedSlots: this.$scopedSlots,
             },
             updateContextForSlotVNodes(this.$slots, this)
@@ -57,7 +58,9 @@ export function WithInjectToProps(component, { name, functional }) {
 // We always get the options from a extended Vue constructur
 // since it has all options (i.e.) normalized for us already
 function normalizeComponent(component) {
-  return typeof component === 'function' ? component : Vue.extend(component)
+  return typeof component === 'function'
+    ? component
+    : Vue.extend({ ...component })
 }
 
 /** this is the heart of the component, really.
