@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import pick from 'lodash/pick'
-import merge from 'lodash/merge'
 
-export function WithInjectToProps(component, { name, functional }) {
+export function WithInjectToProps(
+  component,
+  { name, functional, updateSlotContext = true }
+) {
   component = normalizeComponent(component)
-  console.log('options: ', component.options)
   const { name: compName, props: propDefs = {} } = component.options
 
   return {
@@ -49,7 +49,9 @@ export function WithInjectToProps(component, { name, functional }) {
               props: this.propsToInject,
               scopedSlots: this.$scopedSlots,
             },
-            updateContextForSlotVNodes(this.$slots, this)
+            updateSlotContext
+              ? updateContextForSlotVNodes(this.$slots, this._self)
+              : this.$vnode.componentOptions.children
           )
         },
   }
@@ -75,10 +77,27 @@ function injectProps(props, injected, propDefs) {
 
 function updateContextForSlotVNodes($slots, vm) {
   const vnodes = Object.keys($slots).reduce((acc, key) => {
-    return [...acc, $slots[key]]
+    return [...acc, ...$slots[key]]
   }, [])
-  return vnodes.map(node => {
+  const newVNodes = vnodes.map(node => {
     node.context = vm
     return node
   })
+  return newVNodes
+}
+
+function merge(objectA, objectB) {
+  const res = Object.assign({}, objectA)
+  Object.keys(objectB).forEach(key => {
+    if (objectB[key] == null) return
+    res[key] = objectB[key]
+  })
+  return res
+}
+
+function pick(obj = {}, arr = []) {
+  return arr.reduce((picked, key) => {
+    picked[key] = obj[key]
+    return picked
+  }, {})
 }

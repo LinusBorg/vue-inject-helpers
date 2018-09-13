@@ -3,7 +3,10 @@
     <button @click="toggle">Toggle</button> ({{this.provider.b}})
     <hr>
     <SimpleDemo/>
-    <SimpleDemoWithInject/>
+    <SimpleDemoWithInject>
+      <p>Test</p>
+      <p slot="named">Test named</p>
+    </SimpleDemoWithInject>
     <SimpleFunctionalWithInject/>
   </div>
 </template>
