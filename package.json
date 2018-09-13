@@ -1,14 +1,21 @@
 {
-  "name": "vue-provide-wrapper",
+  "name": "vue-inject-to-props",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build:example": "vue-cli-service build",
+    "build:lib": "vue-cli-service build --target lib --name VueInjectToProps ./src/index.js",
     "build:analyze": "V_APP_ANALYZE=1 yarn build:lib",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
+  "main": "dist/VueInjectToProps.common.js",
+  "browser": "dist/VueInjectToProps.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
     "vue": "^2.5.17"
   },
