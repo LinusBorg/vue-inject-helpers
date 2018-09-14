@@ -1,6 +1,12 @@
 {
   "name": "vue-inject-to-props",
   "version": "0.1.0",
+  "description": "A Vue Wrapper Component to inject props from an `inject` source into a child's props",
+  "author": {
+    "name": "Thorsten Lünborg",
+    "url": "https://www.github.com/linusborg"
+  },
+  "repository": "https://www.github.com/linusborg/vue-inject-to-props",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -16,8 +22,8 @@
     "dist",
     "src"
   ],
-  "dependencies": {
-    "vue": "^2.5.17"
+  "peerDependencies": {
+    "vue": "^2.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.2",
@@ -30,8 +36,12 @@
     "babel-jest": "^23.0.1",
     "lint-staged": "^7.2.2",
     "prettier-eslint": "^8.8.2",
+    "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.17",
     "webpack-bundle-analyzer": "^3.0.2"
+  },
+  "engines": {
+    "node": "^8.12"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
