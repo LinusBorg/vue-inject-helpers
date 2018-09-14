@@ -9,7 +9,7 @@
 
 <script>
 import Vue from 'vue'
-import WithInjectToProps from '../'
+import WithInjectToProps from '#lib'
 const c = Vue.extend({
   name: 'simpleFunctional',
   props: ['a', 'b'],
