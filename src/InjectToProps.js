@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { merge, pick } from './utils'
 
 export function WithInjectToProps(
   component,
@@ -84,20 +85,4 @@ function updateContextForSlotVNodes($slots, vm) {
     return node
   })
   return newVNodes
-}
-
-function merge(objectA, objectB) {
-  const res = Object.assign({}, objectA)
-  Object.keys(objectB).forEach(key => {
-    if (objectB[key] == null) return
-    res[key] = objectB[key]
-  })
-  return res
-}
-
-function pick(obj = {}, arr = []) {
-  return arr.reduce((picked, key) => {
-    picked[key] = obj[key]
-    return picked
-  }, {})
 }
