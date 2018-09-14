@@ -1,7 +1,7 @@
 import { WithInjectToProps } from './InjectToProps'
+import InjectProvider from './InjectProvider'
 
 const version = process.env.VUE_APP_VERSION
 
-WithInjectToProps.version = version
-
 export default WithInjectToProps
+export { WithInjectToProps, InjectProvider, version }
