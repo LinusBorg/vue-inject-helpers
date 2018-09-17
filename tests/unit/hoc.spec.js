@@ -1,5 +1,9 @@
-import { createWrappedStub, makeReactive } from './resources/utils'
+import { createWrappedStub, makeReactive } from './resources/hoc-utils'
 
+/**
+ * TODO
+ * - test slots re-contextualization
+ */
 describe('The HOC', () => {
   const modes = [false, true]
 
@@ -17,6 +21,7 @@ describe('The HOC', () => {
         if (!functional) {
           expect(wrapper.vm.test).toMatchObject(inject)
         }
+
         const props = wrapper.find(child).props()
         expect(props).toMatchObject({
           a: 'A',
@@ -32,6 +37,7 @@ describe('The HOC', () => {
         const { wrapper, child } = createWrappedStub(inject, ['a', 'c'], {
           functional,
         })
+
         const vm = wrapper.find(child).vm
         expect(vm.$props).toMatchObject({
           a: 'A',
@@ -64,12 +70,6 @@ describe('The HOC', () => {
         })
         done()
       })
-
-      if (!functional) {
-        // Tests for normal component only
-      } else {
-        // Tests for normal component only
-      }
     })
   })
 })
