@@ -14,7 +14,8 @@
     "build:lib": "vue-cli-service build --target lib --name VueInjectToProps ./lib/index.js",
     "build:analyze": "V_APP_ANALYZE=1 yarn build:lib",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "test:unit:w": "vue-cli-service test:unit --watch"
   },
   "main": "dist/VueInjectToProps.common.js",
   "browser": "dist/VueInjectToProps.umd.min.js",
