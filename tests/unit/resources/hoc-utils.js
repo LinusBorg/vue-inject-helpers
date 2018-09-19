@@ -38,7 +38,6 @@ export function createWrappedStub(inject, props, options, wrapperOptions = {}) {
 
   const wrapper = mount(wrappedChild, {
     ...wrapperOptions,
-    //parentComponent,
     provide: {
       test: inject,
     },
