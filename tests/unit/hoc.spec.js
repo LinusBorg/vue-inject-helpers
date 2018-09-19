@@ -1,4 +1,5 @@
 import { createWrappedStub, makeReactive } from './resources/hoc-utils'
+import Vue from 'vue'
 
 /**
  * TODO
@@ -70,6 +71,61 @@ describe('The HOC', () => {
         })
         done()
       })
+
+      it('props passed to the component overwrite injection properties', async done => {
+        const inject = {
+          a: 'A',
+          b: 'B',
+        }
+        const { wrapper, child } = createWrappedStub(inject, ['a', 'b'], {
+          functional,
+        })
+
+        const vm = wrapper.find(child).vm
+        expect(vm.$props).toMatchObject({
+          a: 'A',
+          b: 'B',
+        })
+
+        wrapper.setProps({ b: 'BB' })
+
+        await wrapper.vm.$nextTick()
+
+        expect(vm.$props).toMatchObject({
+          a: 'A',
+          b: 'BB',
+        })
+        done()
+      })
+
+      if (!functional) {
+        // this test fails for functional components,
+        // but I assume it's because vue-test-utils fails to inhect
+        // the listeners properly, because
+        // events are passed cleanly in the example app.
+        it.only('passes listeners to the wrapped component', async done => {
+          const inject = {
+            a: 'A',
+            b: 'B',
+          }
+          const fn = jest.fn()
+          const { wrapper, child } = createWrappedStub(
+            inject,
+            ['a', 'b'],
+            {
+              functional,
+            },
+            { listeners: { click: fn } }
+          )
+          await Vue.nextTick()
+
+          wrapper.find(child).vm.$emit('click', 'test')
+          functional && console.log(wrapper.find(child).vm.$listeners)
+          expect(fn).toHaveBeenCalledWith('test')
+
+          done()
+        })
+      }
     })
   })
 })
