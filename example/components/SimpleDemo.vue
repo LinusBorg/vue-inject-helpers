@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h3>Simple Demo</h3>
+    <h3 @click="emit">Simple Demo</h3>
     <pre>
+      a: {{ a }}
       b: {{ b }}  
     </pre> 
     default slot: <slot/>
@@ -15,6 +16,12 @@ import WithInjectToProps from '#lib'
 const c = Vue.extend({
   name: 'simpleDemo',
   props: ['a', 'b'],
+  methods: {
+    emit() {
+      console.log('emit')
+      this.$emit('click')
+    },
+  },
 })
 export default c
 

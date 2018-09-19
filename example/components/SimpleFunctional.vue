@@ -1,9 +1,12 @@
 <template>
   <div>
-    <h3>Simple Demo</h3>
+    <h3 @click="emit">Simple Demo</h3>
     <pre>
+      a: {{ a }}
       b: {{ b }}  
-    </pre> 
+    </pre>
+    default slot: <slot/>
+    "named" slot: <slot name="named" />
   </div>
 </template>
 
@@ -13,7 +16,14 @@ import WithInjectToProps from '#lib'
 const c = Vue.extend({
   name: 'simpleFunctional',
   props: ['a', 'b'],
+  methods: {
+    emit() {
+      console.log('emit')
+      this.$emit('click')
+    },
+  },
 })
+
 export default c
 
 c.WithInject = WithInjectToProps(c, {

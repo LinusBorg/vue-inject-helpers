@@ -2,12 +2,18 @@
   <div id="app">
     <button @click="toggle">Toggle</button> ({{this.provider.b}})
     <hr>
-    <SimpleDemo/>
-    <SimpleDemoWithInject>
-      <p>Test</p>
-      <p slot="named">Test named</p>
-    </SimpleDemoWithInject>
-    <SimpleFunctionalWithInject/>
+
+    <div class="demos">
+      <SimpleDemo />
+      <SimpleDemoWithInject @click="provider.a = 'AA'">
+        <p>Test</p>
+        <p slot="named">Test named</p>
+      </SimpleDemoWithInject>
+      <SimpleFunctionalWithInject @click="provider.a = 'AA'">
+        <p>Test</p>
+        <p slot="named">Test named</p>
+      </SimpleFunctionalWithInject>
+    </div>
   </div>
 </template>
 
@@ -15,7 +21,6 @@
 import SimpleDemo from './components/SimpleDemo'
 import SimpleFunctional from './components/SimpleFunctional'
 
-console.log(SimpleDemo.WithInject)
 export default {
   name: 'app',
   components: {
@@ -51,5 +56,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.demos {
+  display: flex;
+  justify-content: space-around;
 }
 </style>
