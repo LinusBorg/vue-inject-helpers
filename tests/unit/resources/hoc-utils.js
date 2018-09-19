@@ -32,11 +32,12 @@ export function makeReactive(object) {
   }).$data
 }
 
-export function createWrappedStub(inject, props, options) {
+export function createWrappedStub(inject, props, options, wrapperOptions = {}) {
   const child = stubChild(props)
   const wrappedChild = wrapComponent(child, options)
 
   const wrapper = mount(wrappedChild, {
+    ...wrapperOptions,
     //parentComponent,
     provide: {
       test: inject,
