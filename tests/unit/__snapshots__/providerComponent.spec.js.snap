@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`The Provider Component allows to overwrite inject values with props 1`] = `
+<div>
+  <div><span class="test-span">overwritten message!</span></div>
+</div>
+`;
+
 exports[`The Provider Component re-renders when reactive data is changed 1`] = `
 <div>
   <div><span class="test-span">new test message</span></div>

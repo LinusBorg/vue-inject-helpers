@@ -1,6 +1,8 @@
 <template>
   <div>
-    <InjectProvider>
+    <InjectProvider :props="{
+      msg: msgOverwrite
+    }">
       <div slot-scope="{msg}">
         <span class="test-span">{{msg}}</span>
       </div>
@@ -13,6 +15,7 @@ export default {
   name: 'TestProvider',
   props: {
     msg: String,
+    msgOverwrite: String,
   },
   components: {
     InjectProvider: createInjectProvider('test'),
