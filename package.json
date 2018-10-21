@@ -1,7 +1,7 @@
 {
-  "name": "vue-inject-to-props",
+  "name": "vue-inject-helpers",
   "version": "0.1.0",
-  "description": "A Vue Wrapper Component to inject props from an `inject` source into a child's props",
+  "description": "A small collection of Vue components that make work with `inject` better and easier",
   "author": {
     "name": "Thorsten Lünborg",
     "url": "https://www.github.com/linusborg"
@@ -11,14 +11,14 @@
   "scripts": {
     "serve": "vue-cli-service serve ./example/main.js",
     "build:example": "vue-cli-service build ./example/main.js",
-    "build:lib": "vue-cli-service build --target lib --name VueInjectToProps ./lib/index.js",
-    "build:analyze": "V_APP_ANALYZE=1 yarn build:lib",
+    "build:lib": "vue-cli-service build --target lib --name VueInjectHelpers ./lib/index.js",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:w": "vue-cli-service test:unit --watch"
   },
-  "main": "dist/VueInjectToProps.common.js",
-  "browser": "dist/VueInjectToProps.umd.min.js",
+  "sideEffects": false,
+  "main": "dist/VueInjectHelpers.common",
+  "browser": "dist/VueInjectHelpers.umd.min",
   "files": [
     "dist",
     "src"
@@ -38,8 +38,7 @@
     "lint-staged": "^7.2.2",
     "prettier-eslint": "^8.8.2",
     "vue": "^2.5.17",
-    "vue-template-compiler": "^2.5.17",
-    "webpack-bundle-analyzer": "^3.0.2"
+    "vue-template-compiler": "^2.5.17"
   },
   "engines": {
     "node": "^8.12"
