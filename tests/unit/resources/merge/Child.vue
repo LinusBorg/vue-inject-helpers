@@ -11,6 +11,7 @@ export default {
   inject: ['test'],
   props: {
     msg: String,
+    b: String,
   },
   mixins: [mergeInjectWithProps('test', 'testPropsChanged')],
 }

@@ -10,6 +10,7 @@ export default {
   name: 'TestProvider',
   props: {
     msg: String,
+    b: String,
   },
   components: {
     Child,
@@ -18,6 +19,7 @@ export default {
     return {
       test: {
         msg: 'Provided message',
+        b: this.b,
       },
     }
   },
