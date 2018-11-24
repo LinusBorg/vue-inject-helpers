@@ -2,7 +2,7 @@
 
 exports[`The Provider Component allows to overwrite inject values with props 1`] = `
 <div>
-  <div><span class="test-span">overwritten message!</span></div>
+  <div><span class="test-span">test message</span></div>
 </div>
 `;
 

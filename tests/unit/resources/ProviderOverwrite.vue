@@ -1,8 +1,6 @@
 <template>
   <div>
-    <InjectProvider :props="{
-      msg: msgOverwrite
-    }">
+    <InjectProvider :mergeProps="true">
       <div slot-scope="{msg}">
         <span class="test-span">{{msg}}</span>
       </div>
@@ -15,14 +13,16 @@ export default {
   name: 'TestProvider',
   props: {
     msg: String,
-    msgOverwrite: String,
+    msgForInject: String,
   },
   components: {
     InjectProvider: createInjectProvider('test'),
   },
   provide() {
     return {
-      test: this.$props,
+      test: {
+        msg: this.msgForInject,
+      },
     }
   },
 }

@@ -35,11 +35,11 @@ describe('The Provider Component', () => {
     const wrapper = mount(ProviderOverwrite, {
       propsData: {
         msg: 'test message',
-        msgOverwrite: 'overwritten message!',
+        msgForInject: 'test message (from inject)',
       },
     })
     const span = wrapper.find('.test-span')
-    expect(span.text()).toBe('overwritten message!')
+    expect(span.text()).toBe('test message')
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
