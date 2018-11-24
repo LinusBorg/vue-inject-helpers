@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Child :msg="msg"/>
+    <Child :msg="msg" :c="c && c + '!'"/>
   </div>
 </template>
 <script>
@@ -11,6 +11,7 @@ export default {
   props: {
     msg: String,
     b: String,
+    c: String,
   },
   components: {
     Child,
@@ -20,6 +21,7 @@ export default {
       test: {
         msg: 'Provided message',
         b: this.b,
+        c: this.c,
       },
     }
   },
