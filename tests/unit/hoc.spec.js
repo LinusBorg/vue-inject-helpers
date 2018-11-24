@@ -73,6 +73,27 @@ describe('The HOC', () => {
         done()
       })
 
+      it('maps props to inject properties when mapper is provided', () => {
+        const inject = {
+          a: 'A',
+          b: 'B',
+        }
+        const { wrapper, child } = createWrappedStub(inject, ['a', 'c'], {
+          functional,
+          mapper: { c: 'b' },
+        })
+        // we can't check the injection of the functional component, there's no instance.
+        if (!functional) {
+          expect(wrapper.vm.test).toMatchObject(inject)
+        }
+
+        const props = wrapper.find(child).props()
+        expect(props).toMatchObject({
+          a: 'A',
+          c: 'B',
+        })
+      })
+
       if (!functional) {
         // This test doesn't work with test-utils for functional compontents, but the example app shows
         // that the code itself does work
