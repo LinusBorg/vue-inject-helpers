@@ -9,6 +9,9 @@ import { mergeInjectWithProps } from '#lib/MergeInjectWithProps'
 export default {
   name: 'child',
   inject: ['test'],
+  props: {
+    msg: String,
+  },
   mixins: [mergeInjectWithProps('test', 'testPropsChanged')],
 }
 </script>
