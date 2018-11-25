@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils'
 import ProviderContainer from './resources/Provider'
 import ProviderOverwrite from './resources/ProviderOverwrite'
+import ProviderMerge from './resources/ProviderMerge'
+import ProviderIntersection from './resources/ProviderIntersection'
 
 describe('The Provider Component', () => {
   it('works', () => {
@@ -40,6 +42,31 @@ describe('The Provider Component', () => {
     })
     const span = wrapper.find('.test-span')
     expect(span.text()).toBe('test message')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('allows to remap property names between props & inject', () => {
+    const wrapper = mount(ProviderMerge, {
+      propsData: {
+        msg: 'test message',
+        mergeProps: 'union',
+        propsMapper: { msg: 'msgInjected' },
+      },
+    })
+    const span = wrapper.find('.test-span')
+    expect(span.text()).toBe('test message')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('inject mode', () => {
+    const wrapper = mount(ProviderIntersection, {
+      propsData: {
+        msg: 'test message',
+        mergeProps: 'intersection',
+      },
+    })
+    const span = wrapper.find('.test-span')
+    expect(span.text()).toBe('test message Injected')
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
