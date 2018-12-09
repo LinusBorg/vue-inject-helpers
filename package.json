@@ -11,14 +11,15 @@
   "scripts": {
     "serve": "vue-cli-service serve ./example/main.js",
     "build:example": "vue-cli-service build ./example/main.js",
-    "build:lib": "vue-cli-service build --target lib --name VueInjectHelpers ./lib/index.js",
+    "build:lib": "vue-cli-service build --target lib --format umd --name VueInjectHelpers ./lib/index.js",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:w": "vue-cli-service test:unit --watch"
   },
   "sideEffects": false,
   "main": "dist/VueInjectHelpers.common",
-  "browser": "dist/VueInjectHelpers.umd.min",
+  "unpkg": "dist/VueInjectHelpers.umd.min",
+  "jsDelivr": "dist/VueInjectHelpers.umd.min",
   "files": [
     "dist",
     "src"
@@ -27,6 +28,7 @@
     "vue": "^2.3"
   },
   "devDependencies": {
+    "@babel/runtime-corejs2": "^7.2.0",
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-eslint": "^3.2.1",
     "@vue/cli-plugin-unit-jest": "^3.2.0",
