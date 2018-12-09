@@ -1,7 +1,5 @@
 <template>
-  <div>
-    {{testPropsChanged.msg}}
-  </div>
+  <div>{{ testPropsChanged.msg }}</div>
 </template>
 
 <script>
@@ -17,6 +15,3 @@ export default {
   mixins: [mergeInjectWithProps('test', 'testPropsChanged')],
 }
 </script>
-
-<style scoped>
-</style>
